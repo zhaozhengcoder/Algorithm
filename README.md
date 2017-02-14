@@ -1,2 +1,3 @@
 # Algorithm
-leetcode/lintcode 上的算法练习
+leetcode/lintcode上的刷题练习
+
