@@ -5,7 +5,8 @@ public:
      * @param A: Given n items with size A[i]
      * @return: The maximum size
      */
-	 //new 2234234324
+	 //new 2
+	 //1231
 	int max(int v1,int v2){
 		if(v1>v2){
 			return v1;
