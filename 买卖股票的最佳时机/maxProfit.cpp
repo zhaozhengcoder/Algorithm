@@ -23,6 +23,7 @@ public:
         // write your code here
 		if(prices.size()<2)
 			return 0;
+		//如果不买也不买，利润是0，所以，利润不可能为负数，最小为0
 		int maxprofit=0;
 		int minprices=prices[0];
 		for(int i=1;i<prices.size();i++){
