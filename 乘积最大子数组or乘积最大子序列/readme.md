@@ -2,6 +2,8 @@
 
 找出一个序列中乘积最大的连续子序列（至少包含一个数）。
 
+http://www.lintcode.com/zh-cn/problem/maximum-product-subarray/
+
 样例 
 比如, 序列 [2,3,-2,4] 中乘积最大的子序列为 [2,3] ，其乘积为6。
 
