@@ -17,6 +17,7 @@ void comb(char * arr,int length,int index,int k,vector<char>& cur ,vector<vector
 		if(cur.size()==k){
 			res.push_back(cur);
 		}
+		return;
 	}
 	//进入下一波递归
 	//取
