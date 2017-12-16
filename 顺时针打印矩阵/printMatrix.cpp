@@ -43,6 +43,8 @@ public:
         vector<int> ret;
         if(matrix.size() == 0 || columns <=0 || rows <= 0) return ret;
         int start = 0;
+
+        //难点在于理解这个边界条件
         while(columns > start*2 && rows > start*2){
             PrintMatrixInCircle(matrix,start,ret);
             ++start;
