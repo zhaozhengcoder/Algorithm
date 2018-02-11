@@ -19,6 +19,14 @@ public:
      * @param A: A list of integers
      * @return: A boolean
      */
+
+	/*
+	思路：
+	从后向前遍历数组，对于当前的index，有两种可能:
+		1. 如果这个点可以直接跳到最后一个位置，那么dp[index]=1
+		2. 如果这个点不可以直接跳到最后一个位置：
+			那么判断这个点是否可以跳到[index+1,最后]的dp为1的点，如果可以跳到，那么这个点的dp[index]=1
+	*/
     bool canJump(vector<int> &A) {
         // write your code here
 		vector<int> dp(A.size(),-1);
