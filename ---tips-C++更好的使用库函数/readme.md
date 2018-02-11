@@ -25,31 +25,31 @@
 
 * 重载comp函数，比较结构体的大小 
 (比如：按照point结构体的x值的大小从小到大排列point对象)
-```
-#include <algorithm>
+    ```
+    #include <algorithm>
 
-struct point{
-	int x;
-	int y;
-};
+    struct point{
+        int x;
+        int y;
+    };
 
-//从小到大排序
-bool compare(point p1,point p2){
-	return p1.x <p2.x;
-}
+    //从小到大排序
+    bool compare(point p1,point p2){
+        return p1.x <p2.x;
+    }
 
-int main(int argc, char const *argv[])
-{
-	vector<point> vp;  //vp 里面存放这个3个point对象
-	point p1;p1.x=200;p1.y=100;
-	point p2;p2.x=100;p2.y=100;
-	point p3;p3.x=300;p3.y=100;
+    int main(int argc, char const *argv[])
+    {
+        vector<point> vp;  //vp 里面存放这个3个point对象
+        point p1;p1.x=200;p1.y=100;
+        point p2;p2.x=100;p2.y=100;
+        point p3;p3.x=300;p3.y=100;
 
-	vp.push_back(p1);
-        vp.push_back(p2);
-        vp.push_back(p3);
-        //给vp里面的point对象按照x的大小，从小到大排序
-	sort(vp.begin(),vp.end(),compare);
+        vp.push_back(p1);
+            vp.push_back(p2);
+            vp.push_back(p3);
+            //给vp里面的point对象按照x的大小，从小到大排序
+        sort(vp.begin(),vp.end(),compare);
 
-}
-```
+    }
+    ```
