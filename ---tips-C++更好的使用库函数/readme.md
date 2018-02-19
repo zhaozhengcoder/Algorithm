@@ -53,3 +53,23 @@
 
     }
     ```
+
+
+* String 处理
+    
+    反转
+    ```
+    #include <string>
+    #include <algorithm>
+
+    string str="abcd";
+	//cout<<str<<endl;
+	reverse(str.begin(),str.end());
+	//cout<<str<<endl;     //reverse string
+    ```
+
+    提取子串
+    ```
+    string str="abcd";
+	string substr = str.substr(1,3);
+    ```
