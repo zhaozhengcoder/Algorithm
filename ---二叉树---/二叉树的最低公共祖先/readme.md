@@ -30,3 +30,5 @@
 
         然后找到两个链表的 最后公共结点。
 
+        http://blog.csdn.net/getnextwindow/article/details/23332265
+
