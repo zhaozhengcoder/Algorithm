@@ -10,6 +10,7 @@ struct intervals{
 	int end;
 };
 
+//ä»å°åˆ°å¤§æ’åº
 bool comp(const intervals &inter1,const intervals& inter2){
 	if(inter1.begin<inter2.begin){
 		return true;
@@ -26,7 +27,7 @@ vector<intervals> merge(vector<intervals> & vi)
 
 	for(int i=1;i<vi.size();i++){
 		if(res.back().end > vi[i].begin){
-			//¿ÉÒÔºÏ²¢Çø¼ä
+			//ï¿½ï¿½ï¿½ÔºÏ²ï¿½ï¿½ï¿½ï¿½ï¿½
 			res.back().end=max(res.back().end,vi[i].end);
 		}
 		else{
