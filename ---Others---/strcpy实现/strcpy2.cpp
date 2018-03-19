@@ -20,10 +20,10 @@ char *  my_strcpy(const char * src, char * des) {
 	return des;
 }
 
-//解决 des和src的地址空间重合的问题
 char * my_strcpy2(char * src, char * des) {
-	assert(src != NULL && des != NULL);
-
+	assert(src != NULL && des != NULL);		//排除src==NULL的情况
+	assert(des != src + strlen(src));       //排除des的指针恰好指向src的最后一个字符'\0'的地方
+	
 	//先检测地址是否重合
 	if (src<des && src + strlen(src) >des) {
 		char * end = src + strlen(src) - 1; //指向最后
@@ -49,12 +49,27 @@ char * my_strcpy2(char * src, char * des) {
 
 int main()
 {
-	char src[] = "hello world";
+	char src[] = "helloworld";
 	char * des = new char[20];
 
 
+	//assert(1 == 2);
+	//cout << src << endl;
+	//cout << des << endl;
+
+	//my_strcpy(src, des);
+
+	//cout << src << endl;
+	//cout << des << endl;
+
+
+	//但是对于 src和des地址重合的问题，就会出问题
+
+	//my_strcpy(src + 2, src);
+	//cout << src << endl;    //ok
+
 	my_strcpy2(src, src + 2);
-	cout << src << endl;   // not ok
+	cout << src << endl;   
 
 	system("pause");
 	return 0;
