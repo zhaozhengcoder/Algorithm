@@ -55,4 +55,8 @@ int main(){
     return 0;
 }
 
-//g++ thread.cpp -lpthread
+//Q1: 如何编译 ： g++ thread.cpp -lpthread 
+//Q2: pthread_create 函数有4个参数，分别是 #1 线程标识符，#2默认为NULL (也可以设置为分离模式启动) #3 线程执行的函数 #4 函数的参数
+//Q3: pthread_exit 返回函数的返回值
+
+//以分离模式启动的线程，不需要pthread_join
