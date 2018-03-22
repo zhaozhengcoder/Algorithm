@@ -7,6 +7,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <stdio.h>
+
 using namespace std;
 
 typedef struct{
@@ -17,14 +18,14 @@ typedef struct{
 
 //线程1执行的函数
 void* th1(void * arg){
-    sleep(1);
+    sleep(5);
     cout<<"thread 1 : do somethind"<<endl;
 }
 
 
 //线程2执行的函数
 void* th2(void * arg){
-    sleep(1);
+    sleep(5);
     Stu * s =(Stu * ) arg;
     cout<<"val1 : "<<s->val1<<" val2: "<<s->val2<<endl;
     cout<<"thread 2 : do somethind"<<endl;
@@ -57,6 +58,7 @@ int main(){
 
 //Q1: 如何编译 ： g++ thread.cpp -lpthread 
 //Q2: pthread_create 函数有4个参数，分别是 #1 线程标识符，#2默认为NULL (也可以设置为分离模式启动) #3 线程执行的函数 #4 函数的参数
+//以分离模式启动的线程，不需要pthread_join
 //Q3: pthread_exit 返回函数的返回值
 
-//以分离模式启动的线程，不需要pthread_join
+//Q4: linux 下需要查看线程的话，ps -T -p pid
