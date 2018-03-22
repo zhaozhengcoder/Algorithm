@@ -73,3 +73,31 @@
     string str="abcd";
 	string substr = str.substr(1,3);
     ```
+
+* list
+    ```
+    //遍历0~n
+    for (auto iter = li.begin(); iter != li.end(); iter++) {
+		cout << *iter << " ";
+	}
+
+    //遍历0~n-1
+    auto iter2 = li.end();
+	iter2--;
+	for (auto iter = li.begin(); iter != iter2; iter++) {
+		cout << *iter << " ";
+	}
+
+    //反向遍历n~0
+    for (auto iter = li.rbegin(); iter != li.rend(); iter++) {
+		cout << *iter << " ";
+	}
+
+
+    //反向遍历n~1
+    auto iter3 = li.rend();
+	iter3--;
+	for (auto iter = li.rbegin(); iter != iter3; iter++) {
+		cout << *iter << " ";
+	}
+    ```
