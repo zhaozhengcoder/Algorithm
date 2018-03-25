@@ -46,9 +46,9 @@
         point p3;p3.x=300;p3.y=100;
 
         vp.push_back(p1);
-            vp.push_back(p2);
-            vp.push_back(p3);
-            //给vp里面的point对象按照x的大小，从小到大排序
+        vp.push_back(p2);
+        vp.push_back(p3);
+        //给vp里面的point对象按照x的大小，从小到大排序
         sort(vp.begin(),vp.end(),compare);
 
     }
@@ -101,3 +101,150 @@
 		cout << *iter << " ";
 	}
     ```
+
+* map
+
+    map默认的顺序是根据key的顺序从小到大在里面排序。（因为map的底层是一棵红黑树）
+
+    第一个问题，如果我们自定义一个key的排序规则，那么要怎么办？
+   
+    第二个问题，我们能不能根据value来排序？
+        
+        第一反应是利用stl中提供的sort算法实现，这个想法是好的，不幸的是，sort算法有个限制，利用sort算法只能对序列容器进行排序，就是线性的（如vector，list，deque）。
+        
+        map也是一个集合容器，它里面存储的元素是pair，但是它不是线性存储的（前面提过，像红黑树），所以利用sort不能直接和map结合进行排序。
+
+    关于问题1：
+    ```
+    //基本语法
+    //step1 ：定义比较函数
+    //根据key的长度从小到大排序（参数的类型是key的数据结构）
+    bool comp(const string& k1, const string& k2) {
+        return k1.length() < k2.length();
+    }
+
+    //step2 : 创建map是指定比较函数
+    map<string, int, decltype(comp) * > mymap(comp);
+    ```
+    给个例子：
+    ```
+    //根据key的长度从小到大排序
+    bool comp(const string& k1, const string& k2) {
+        return k1.length() < k2.length();
+    }
+    int main()
+    {
+        //重新定义比较规则的map
+        map<string, int, decltype(comp) * > mymap(comp);
+        mymap["LiMin"] = 90;
+        mymap["ZiLinMi"] = 79;
+        mymap["BoB"] = 92;
+        mymap.insert(make_pair("Bing", 99));
+        mymap.insert(make_pair("Albert", 86));
+
+        //默认的map
+        map<string, int> mymap2;
+        mymap2["LiMin"] = 90;
+        mymap2["ZiLinMi"] = 79;
+        mymap2["BoB"] = 92;
+        mymap2.insert(make_pair("Bing", 99));
+        mymap2.insert(make_pair("Albert", 86));
+
+        system("pause");
+        return 0;
+    };
+    ```
+
+    对于问题2：
+    如果一定要根据map的value的大小排序的话
+    
+    我的想法：
+    1. 先转换成vector(转换成一个线性的数据结构)
+    2. 然后利用sort函数对vector排序
+
+    ```
+    //从小到大排序
+    bool vector_cmp(const pair<string,int> & p1,const pair<string,int> &p2){
+	    return p1.second < p2.second;
+    }
+
+    map<string, int> mymap2;
+	mymap2["LiMin"] = 90;
+	mymap2["ZiLinMi"] = 79;
+	mymap2["BoB"] = 92;
+	mymap2.insert(make_pair("Bing", 99));
+	mymap2.insert(make_pair("Albert", 86));
+
+	vector<pair<string, int>> v_pair(mymap2.begin(), mymap2.end());
+	sort(v_pair.begin(), v_pair.end(), vector_cmp); 
+    ```
+
+* STL 里面使用堆 heap
+
+    STL中与堆相关的4个函数——建立堆make_heap()，在堆中添加数据push_heap()，在堆中删除数据pop_heap()和堆排序sort_heap()。
+
+    1. 建立堆
+    
+        make_heap(_First, _Last, _Comp)
+
+        默认是建立最大堆的。对int类型，可以在第三个参数传入greater<int>()得到最小堆。
+
+    2. 在堆中添加数据
+
+        push_heap (_First, _Last)
+
+        要先在容器中加入数据，再调用push_heap ()
+
+    3. 在堆中删除数据 
+
+        pop_heap(_First, _Last)
+        
+        要先调用pop_heap()再在容器中删除数据
+
+    4. 堆排序
+
+        sort_heap(_First, _Last) 
+
+        排序之后就不再是一个合法的heap了
+
+
+    * 举个例子
+        ```
+        vector<int> vi{ 4,2,1,8,4,6,5,7,9,10 };
+
+        PrintfVectorInt(vi);
+
+        //make_heap(_First, _Last, _Comp)
+        //默认是建立最大堆的。对int类型，可以在第三个参数传入greater<int>()得到最小堆。
+        make_heap(vi.begin(), vi.end(), greater<int>());
+
+        PrintfVectorInt(vi);
+
+
+        //先将元素加入堆里面
+        vi.push_back(50);
+        //然后，在调用push_heap
+        push_heap(vi.begin(), vi.end());
+
+        for (int i = 0; i < 10; i++) {
+            //弹出堆顶元素
+            pop_heap(vi.begin(), vi.end());
+            vi.pop_back();
+            PrintfVectorInt(vi);
+        }
+
+        //堆排序
+        //排序之后就不再是一个合法的heap了
+        sort_heap(vi.begin(), vi.end());
+        ```
+
+        ```
+        //大顶堆
+        bool compare(const point & p1,const point & p2) {
+	        return p1.x <p2.x;
+        }
+
+
+    	vector<point> vp = { point(3,2),point(9,10),point(5,5) ,point(3,7) ,point(3,4) ,point(7,8) };
+	    make_heap(vp.begin(), vp.end(), compare);
+        ```
