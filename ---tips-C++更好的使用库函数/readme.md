@@ -240,6 +240,8 @@
 
         ```
         //大顶堆
+        //注意：堆的comp函数很坑，表示的意思是如果!cmp
+        //也就是说，这里写的是从小到大，但是结果却是从大到小
         bool compare(const point & p1,const point & p2) {
 	        return p1.x <p2.x;
         }
@@ -248,3 +250,52 @@
     	vector<point> vp = { point(3,2),point(9,10),point(5,5) ,point(3,7) ,point(3,4) ,point(7,8) };
 	    make_heap(vp.begin(), vp.end(), compare);
         ```
+
+* STL 里面的一个神器 优先队列
+
+    STL提供的priority_queue，发现还挺好用，虽然很多人都称他效率不够高，但是使用起来很方便。
+
+    他的底层的数据结构是一个堆。
+    
+    下面就总结一下它的一般用法：
+    ```
+    //默认模板有三个参数，第一个是优先队列处理的类，第二个参数是容纳优先队列的容器,第三个参数是比较函数
+	priority_queue<int, vector<int>, greater<int>> q;  //less<int>
+
+	q.push(5);
+	q.push(4);
+	q.push(100);
+	q.push(80);
+	q.push(10);
+
+	for (int i = 0; i < 5; i++) {
+		cout << q.top() << endl;
+		q.pop();
+	}
+    ```
+    对于自定义的数据接结构
+    ```
+    struct point {
+	    int x;
+	    int y;
+	    point(int a, int b) { x = a; y = b;}
+    };
+
+    struct comp1{
+	    bool operator()(point p1, point p2) {
+		    return p1.x< p2.x;
+	    }
+    };
+    
+    priority_queue<point, vector<point>, comp1> p2;
+	p2.push(point(3, 2));
+	p2.push(point(5, 2));
+	p2.push(point(1, 2));
+	p2.push(point(30, 2));
+	p2.push(point(20, 2));
+
+	for (int i = 0; i < 5; i++) {
+		cout << p2.top().x <<"   "<<p2.top().y << endl;
+		p2.pop();
+	}
+    ```
