@@ -6,6 +6,9 @@ using namespace std;
 class Solution2 {
 public:
 	int maxArea(vector<int> height) {
+		if(height.size()==0){
+	        return 0;
+	    }
 		int left = 0;
 		int right = height.size() - 1;
 		int maxares = (right - left) * min(height[left], height[right]);
