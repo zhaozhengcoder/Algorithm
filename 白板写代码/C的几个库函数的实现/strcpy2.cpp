@@ -68,8 +68,8 @@ int main()
 	//my_strcpy(src + 2, src);
 	//cout << src << endl;    //ok
 
-	my_strcpy2(src, src + 2);
-	cout << src << endl;   
+	my_strcpy2(src, src + 2); //原来是 : helloworld
+	cout << src << endl;      //输出是 : hehellowor
 
 	system("pause");
 	return 0;
