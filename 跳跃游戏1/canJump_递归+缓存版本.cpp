@@ -22,6 +22,7 @@ public:
 			return true;
 		}
 
+		//命中缓存
 		if(dp[index]!=-1){
 			if(dp[index]==1){
 				return true;
