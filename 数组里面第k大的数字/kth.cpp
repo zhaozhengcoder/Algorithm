@@ -72,6 +72,7 @@ public:
 	void kth(int k, vector<int> nums,int begin,int end,int& res){
 		//返回的第k大元素的下标，比如第4大的元素的index=3
 		int index=partition2(nums,begin,end);
+		
 		//index_th表示返回的元素是第几大的
 		int index_th=index+1;
 
