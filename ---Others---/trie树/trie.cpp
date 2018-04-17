@@ -1,75 +1,81 @@
+// ConsoleApplication1.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h" //这个不能删除啊
+// ConsoleApplication1.cpp: 定义控制台应用程序的入口点。
+//
 #include <iostream>
 #include <string>
+
 using namespace std;
 
-#define ALPHABET_SIZE 26
 
-typedef struct trie_node
-{
-	int count;   // 记录该节点代表的单词的个数
-	trie_node *children[ALPHABET_SIZE]; // 各个子节点 
-}*trie;
+#define size  26
 
-trie_node* create_trie_node()
-{
-	trie_node* pNode = new trie_node();
-	pNode->count = 0;
-	for (int i = 0; i<ALPHABET_SIZE; ++i)
-		pNode->children[i] = NULL;
-	return pNode;
+struct TrieNode {
+	int count;
+	TrieNode * child[size];
+};
+
+TrieNode * createTrieNode() {
+	TrieNode * node = new TrieNode();
+	node->count = 0;
+	for (int i = 0; i < size; i++) {
+		node->child[i] = NULL;
+	}
+	return node;
 }
 
-void trie_insert(trie root, char* key)
-{
-	trie_node* node = root;
-	char* p = key;
-	while (*p)
-	{
-		if (node->children[*p - 'a'] == NULL)
-		{
-			node->children[*p - 'a'] = create_trie_node();
+void insert(TrieNode * tree,char * str) {
+	TrieNode * node = tree;
+	while (*str != '\0') {
+		if (node->child[*str - 'a'] == NULL) {
+			node->child[*str - 'a'] = createTrieNode();
 		}
-		node = node->children[*p - 'a'];
-		++p;		//插入第一个字符 ; 指向第二个
+		node = node->child[*str - 'a'];
+		str++;
 	}
 	node->count += 1;
 }
 
-/**
-* 查询：不存在返回0，存在返回出现的次数
-*/
-int trie_search(trie root, char* key)
-{
-	trie_node* node = root;
-	char* p = key;
-	while (*p && node != NULL)
-	{
-		node = node->children[*p - 'a'];
-		++p;
-	}
 
-	if (node == NULL)
+int search(TrieNode * tree, char * keystr) {
+	TrieNode * node = tree;
+
+	while (*keystr != '\0' && node!=NULL) {
+		node = node->child[*keystr - 'a'] ;
+		keystr++;
+	}
+	if (node == NULL) {
 		return 0;
-	else
+	}
+	else {
 		return node->count;
+	}
 }
+
 
 int main()
 {
-	// 关键字集合
+
+
 	char keys[][8] = { "the", "a", "there", "answer", "any", "by", "bye", "their" };
-	trie root = create_trie_node();
+	TrieNode* root = createTrieNode();
 
 	// 创建trie树
 	for (int i = 0; i < 8; i++)
-		trie_insert(root, keys[i]);
+		insert(root, keys[i]);
 
-	// 检索字符串
-	char s[][32] = { "Present in trie", "Not present in trie" };
-	printf("%s --- %s\n", "the", trie_search(root, "the")>0 ? s[0] : s[1]);
-	printf("%s --- %s\n", "these", trie_search(root, "these")>0 ? s[0] : s[1]);
-	printf("%s --- %s\n", "their", trie_search(root, "their")>0 ? s[0] : s[1]);
-	printf("%s --- %s\n", "thaw", trie_search(root, "thaw")>0 ? s[0] : s[1]);
+	//查找
+	char find_str1[] = "the";
+	cout<<search(root,find_str1);
+
+	char find_str2[] = "answer";
+	cout << search(root, find_str2);
+
+	char find_str3[] = "xxx";
+	cout << search(root, find_str3);
+
 
 	return 0;
 }
