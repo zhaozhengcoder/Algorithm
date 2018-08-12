@@ -39,6 +39,34 @@
     }
 
 
+    //split 并且转换成 int 
+    vector<int> split_and_to_int(const string& src, const string& delim)
+    {
+        vector<int> dest;
+
+        string str = src;
+        string::size_type start = 0, index;
+        string substr;
+
+        index = str.find_first_of(delim, start);	//在str中查找(起始：start) delim的任意字符的第一次出现的位置
+        while (index != string::npos)
+        {
+            substr = str.substr(start, index - start);
+            dest.push_back(stoi(substr));
+            start = str.find_first_not_of(delim, index);	//在str中查找(起始：index) 第一个不属于delim的字符出现的位置
+            if (start == string::npos)
+            {
+                return dest;
+            }
+            index = str.find_first_of(delim, start);
+        }
+
+        substr = str.substr(start, str.size() - start);
+        dest.push_back(stoi(substr));
+
+        return dest;
+    }
+
     int main()
     {
         //demo1
@@ -57,6 +85,11 @@
         getline(cin, str3);   //当 getline(cin, str);前面的输入是cin>>ss;的话，那么此处str的值时空的，因为他会读取上一行的结束符。
         vector<string> dest3 = split(str3, " ");
         
+        //demo4 
+        string str4 = "12 3 4 5";
+        vector<int> res = split_and_to_int(str4, " ");
+
+
         return 0;
     }
     ```
