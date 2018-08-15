@@ -7,3 +7,6 @@
 
  样例 
 给定 [-3, 1, 3, -3, 4], 返回[1,4].
+
+一个类似的题目：
+可以参考 ： https://github.com/zhaozhengcoder/Algorithm/tree/master/%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84or%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97
