@@ -91,6 +91,45 @@
 
 * 快速排序
 
+    ```
+    int partition(vector<int> & arr, int begin, int end)
+    {
+        int partition_val = arr[end];
+        int sorted_index = begin;
+        for (int i = begin; i < end; i++)
+        {
+            if (arr[i] < partition_val)
+            {
+                swap(arr[sorted_index], arr[i]);
+                sorted_index++;
+            }
+        }
+        swap(arr[sorted_index], arr[end]);
+        return sorted_index;
+    }
+    void quick_sort(vector<int> &arr,int begin,int end)
+    {
+        int left = begin;
+        int right = end;
+        if (left < right)
+        {
+            int index = partition(arr, begin, end);
+            quick_sort(arr, begin, index - 1);
+            quick_sort(arr, index + 1, end);
+        }
+    }
+
+
+    int main()
+    {
+
+        vector<int> arr = { 5,8,1,3,10,9,4,0 };
+        quick_sort(arr, 0, 7);
+
+        return 0;
+    }
+    ```
+
 * 反转链表
 
 * 将一个链表拆分成两个（奇数位组成一个链表；偶数位组成一个链表）
