@@ -133,3 +133,98 @@
 * 反转链表
 
 * 将一个链表拆分成两个（奇数位组成一个链表；偶数位组成一个链表）
+
+* 归并两个有序链表
+    ```
+    #include <iostream>
+    #include <vector>
+
+    using namespace std;
+
+    struct ListNode 
+    {
+        int val;
+        struct ListNode *next;
+        ListNode(int x) :val(x), next(NULL) {}
+    };
+
+    //根据vector去创建一个链表
+    ListNode * create_list_by_vector(vector<int> vi)
+    {
+        ListNode * head = new ListNode(vi[0]);
+        ListNode * p = head;
+        for (int i = 1; i < vi.size(); i++)
+        {
+            ListNode * node = new ListNode(vi[i]);
+            p->next = node;
+            p = p->next;
+        }
+        return head;
+    }
+
+    ListNode* insert(ListNode * tail, ListNode * node)
+    {
+        node->next = NULL;
+        tail->next = node;
+        return node;
+    }
+
+    ListNode * merge(ListNode * head1,ListNode * head2)
+    {
+        ListNode * newhead = new ListNode(-1);
+        ListNode * tail = newhead;
+        while(head1!=NULL && head2!=NULL)
+        {
+            if(head1->val < head2->val)
+            {
+                ListNode * p = head1->next;
+                //插入head1
+                tail = insert(tail,head1);
+                head1 = p;
+            }
+            else
+            {
+                ListNode * p = head2->next;
+                //插入head2
+                tail = insert(tail,head2);
+                head2 = p;
+            }
+        }
+
+        if(head1!=NULL)
+        {
+            tail->next = head1;
+        }
+        else if(head2 != NULL)
+        {
+            tail->next = head2;
+        }
+        return newhead->next;
+    }
+
+    void print_list(ListNode * head)
+    {
+        while(head!=NULL)
+        {
+            cout<<head->val<<endl;
+            head=head->next;
+        }
+    }
+
+    int main()
+    {
+        int arr[] = {1,3,7,9,16 };
+        vector<int> vi1(arr,arr+5);
+        ListNode * head1 = create_list_by_vector(vi1);
+
+        int arr2[]= {2,4,8,10,14,20};
+        vector<int> vi2(arr2,arr2+6);
+        ListNode * head2 = create_list_by_vector(vi2);
+
+        ListNode * newhead = merge(head1,head2);
+
+        print_list(newhead);
+
+        return 0;
+    }
+    ```
