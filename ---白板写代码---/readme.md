@@ -231,50 +231,41 @@
 
 * 第K大的数组
     ```
-    #include <iostream>
-    #include <vector>
-    using namespace std;
-
-    int partition(vector<int> & vi ,int begin ,int end)
+   int get_partition(vector<int> &vi, int begin, int end)
     {
-        int partition_val = vi[end];
-        if(begin<end)
+        int partition = vi[end];
+        int sorted = begin;
+        for (int i = begin; i < end; i++)
         {
-            int sorted = begin;
-            for(int i=begin;i<end;i++)
+            if (partition > vi[i])
             {
-                if(vi[i] < partition_val)
-                {
-                    swap(vi[i],vi[sorted]);
-                    sorted++;
-                }
+                swap(vi[i], vi[sorted]);
+                sorted++;
             }
-            swap(vi[sorted],vi[end]);
-            return sorted;
         }
+        swap(vi[sorted], vi[end]);
+        return sorted;
     }
 
-    int kth(vector<int> &vi,int begin,int end,int k)
+    void topk(vector<int> & vi,int k)
     {
-        //这个边界条件好像有问题
-        if(begin<end)
+        int begin = 0;
+        int end = vi.size() - 1;
+        int index = get_partition(vi, begin, end);
+
+        while (index != k - 1)
         {
-            int index = partition(vi,begin,end);
-
-            if(index<k)
-                return kth(vi,index+1,end,k);
-            else if(index>k)
-                return kth(vi,begin,index-1,k);
+            if (index < k - 1)
+            {
+                index = get_partition(vi, index + 1, end);
+            }
             else
-                return vi[k];
+            {
+                index = get_partition(vi, begin, index-1);
+            }
         }
-    }
 
-    int main()
-    {
-        int arr[]={4,1,2,10,9,7,0,13};
-        vector<int> vi(arr,arr+8);
-
-        cout<<kth(vi,0,7,7)<<endl;
+        cout << vi[index] << endl;
     }
+    
     ```
