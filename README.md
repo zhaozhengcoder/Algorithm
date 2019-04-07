@@ -148,10 +148,3 @@ leetcode/lintcode上的算法题
 如果你对机器学习的算法感兴趣，欢迎共同讨论：
 
 https://github.com/zhaozhengcoder/Machine-Learning
-
-
-### Flag
-
-刷到200题吧~
-
-![](1.PNG)
