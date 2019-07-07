@@ -224,3 +224,5 @@ int main()
         handle_events(epollfd, events, ret, listenfd, buf);
     }
 }
+
+// from https://segmentfault.com/a/1190000003063859
