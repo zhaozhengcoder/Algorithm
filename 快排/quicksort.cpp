@@ -43,17 +43,21 @@ void topk(vector<int> & vi,int k)
 	int end = vi.size() - 1;
 	int index = get_partition(vi, begin, end);
 
-	while (index != k - 1)
-	{
-		if (index < k - 1)
-		{
-			index = get_partition(vi, index + 1, end);
-		}
-		else
-		{
-			index = get_partition(vi, begin, index-1);
-		}
-	}
+        while (index != k-1)
+        {
+            if (index < k-1)
+            {
+                begin = index + 1;
+                end = end;
+                index = get_partition(nums, begin, end);
+            }
+            else
+            {
+                begin = begin;
+                end = index - 1;
+                index = get_partition(nums, begin, end);
+            }
+        }
 
 	cout << vi[index] << endl;
 }
